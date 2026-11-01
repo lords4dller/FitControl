@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block titulo %}Alunos · FitControl{% endblock %}
+{% block conteudo %}
+<div class="cabecalho">
+  <h1>Alunos</h1>
+  <a class="botao" href="{{ url_for('admin.novo_aluno') }}">Cadastrar aluno</a>
+</div>
+
+<section class="cartao">
+  {% if alunos %}
+  <table class="tabela-empilhada">
+    <thead>
+      <tr><th>Aluno</th><th>E-mail</th><th>Treinador atual</th><th>Atribuir ou mudar</th></tr>
+    </thead>
+    <tbody>
+      {% for aluno in alunos %}
+      <tr>
+        <td class="titulo-linha">{{ aluno.usuario.nome }}</td>
+        <td data-rotulo="E-mail">{{ aluno.usuario.email }}</td>
+        <td data-rotulo="Treinador">{{ aluno.treinador.usuario.nome if aluno.treinador else 'Sem treinador' }}</td>
+        <td>
+          <form class="linha-compacta" method="post" action="{{ url_for('admin.atribuir_treinador', aluno_id=aluno.id) }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <select name="treinador_id" aria-label="Treinador de {{ aluno.usuario.nome }}">
+              <option value="">Sem treinador</option>
+              {% for treinador in treinadores %}
+              <option value="{{ treinador.id }}"{% if treinador.id == aluno.treinador_id %} selected{% endif %}>{{ treinador.usuario.nome }}</option>
+              {% endfor %}
+            </select>
+            <button class="botao botao-discreto" type="submit">Salvar</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="apoio">Nenhum aluno cadastrado.</p>
+  {% endif %}
+</section>
+{% endblock %}

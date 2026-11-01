@@ -1,0 +1,2 @@
+FLASK_APP=fitcontrol
+FLASK_DEBUG=1

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block titulo %}Minha semana · FitControl{% endblock %}
+{% block conteudo %}
+<h1>Minha semana</h1>
+<p class="apoio">
+  {% if aluno.treinador %}Treinador: {{ aluno.treinador.usuario.nome }}{% else %}Você ainda não tem treinador.{% endif %}
+</p>
+
+{% set medida = aluno.medida_atual %}
+<div class="indicadores">
+  <div class="cartao indicador">
+    <strong>{{ aluno.dias_de_frequencia|length }}</strong>
+    <span>Dias treinados</span>
+  </div>
+  <div class="cartao indicador">
+    <strong>{{ medida.data.strftime('%d/%m/%Y') if medida else '—' }}</strong>
+    <span>Última avaliação física</span>
+  </div>
+  {% if medida %}
+  <div class="cartao indicador">
+    <strong>{{ medida.peso_kg|numero(' kg') }}</strong>
+    <span>Peso</span>
+  </div>
+  <div class="cartao indicador">
+    <strong>{{ medida.percentual_gordura|numero('%') }}</strong>
+    <span>Gordura corporal</span>
+  </div>
+  <div class="cartao indicador">
+    <strong>{{ medida.imc|numero }}</strong>
+    <span>IMC</span>
+  </div>
+  {% endif %}
+</div>
+
+<div class="navegacao-semana">
+  <a class="botao botao-discreto" href="{{ url_for('aluno.inicio', dia=semana_anterior.isoformat()) }}">← Anterior</a>
+  <strong>{{ semana[0].data.strftime('%d/%m') }} a {{ semana[-1].data.strftime('%d/%m') }}</strong>
+  <a class="botao botao-discreto" href="{{ url_for('aluno.inicio', dia=proxima_semana.isoformat()) }}">Próxima →</a>
+</div>
+
+<nav class="dias-semana" aria-label="Dias da semana">
+  {% for dia in semana %}
+  <a class="dia{% if dia.data == hoje %} dia-hoje{% endif %}"
+     href="{{ url_for('aluno.inicio', dia=dia.data.isoformat()) }}"
+     {% if dia.data == selecionado.data %}aria-current="true"{% endif %}>
+    <span>{{ dia.nome[:3] }}</span>
+    <strong>{{ dia.data.strftime('%d') }}</strong>
+    <small>{% if dia.total %}{{ dia.marcados }}/{{ dia.total }}{% else %}—{% endif %}</small>
+  </a>
+  {% endfor %}
+</nav>
+
+<div class="cabecalho">
+  <h2>{{ selecionado.nome }}, {{ selecionado.data.strftime('%d/%m') }}{% if selecionado.data == hoje %} (hoje){% endif %}</h2>
+  {% if selecionado.data != hoje %}
+  <a class="botao botao-discreto" href="{{ url_for('aluno.inicio') }}">Voltar para hoje</a>
+  {% endif %}
+</div>
+
+{% set futuro = selecionado.data > hoje %}
+{% for bloco in selecionado.treinos %}
+<section class="cartao">
+  <h2>{{ bloco.treino.nome }}</h2>
+  {% if bloco.treino.objetivo %}<p class="apoio">{{ bloco.treino.objetivo }}</p>{% endif %}
+  {% if futuro %}<p class="apoio">A marcação abre neste dia.</p>{% endif %}
+  <ul class="lista-exercicios">
+    {% for item, status in bloco.itens %}
+    <li class="exercicio-dia" id="item-{{ item.id }}">
+      <div class="exercicio-info">
+        <strong>{{ item.exercicio.nome }}</strong>
+        <span>{{ item.exercicio.grupo_muscular.nome }} · {{ item.exercicio.aparelhos|map(attribute='nome')|join(', ') or 'Sem aparelho' }}</span>
+        <span>{{ item.series }} × {{ item.repeticoes }} · {{ item.carga_kg|numero(' kg') }}</span>
+      </div>
+      <form class="marcas" method="post" action="{{ url_for('aluno.marcar') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="item_id" value="{{ item.id }}">
+        <input type="hidden" name="data" value="{{ selecionado.data.isoformat() }}">
+        <button class="marcacao marcacao-feito" type="submit" name="status" value="realizado"
+                role="checkbox" aria-checked="{{ 'true' if status == 'realizado' else 'false' }}"
+                {% if futuro %}disabled{% endif %}>Realizado</button>
+        <button class="marcacao marcacao-nao-feito" type="submit" name="status" value="nao_realizado"
+                role="checkbox" aria-checked="{{ 'true' if status == 'nao_realizado' else 'false' }}"
+                {% if futuro %}disabled{% endif %}>Não realizado</button>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% else %}
+<section class="cartao">
+  <p class="apoio">Nenhum treino previsto para este dia.</p>
+</section>
+{% endfor %}
+{% endblock %}

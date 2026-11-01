@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block titulo %}{{ codigo }} · FitControl{% endblock %}
+{% block conteudo %}
+<section class="cartao centralizado">
+  <h1>{{ codigo }}</h1>
+  <p>{{ mensagem }}</p>
+  <a class="botao" href="{{ url_for('inicio') }}">Voltar ao início</a>
+</section>
+{% endblock %}

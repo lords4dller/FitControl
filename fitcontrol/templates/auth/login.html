@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block titulo %}Entrar · FitControl{% endblock %}
+{% block classe_main %}tela-login{% endblock %}
+{% block conteudo %}
+<section class="cartao cartao-login">
+  <h1 class="marca-login">FitControl</h1>
+  <p class="apoio">Gestão de treinos para academias, treinadores e alunos.</p>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label for="email">E-mail</label>
+    <input id="email" name="email" type="email" autocomplete="username" required autofocus>
+    <label for="senha">Senha</label>
+    <input id="senha" name="senha" type="password" autocomplete="current-password" required>
+    <button class="botao botao-largo" type="submit">Entrar</button>
+  </form>
+</section>
+{% endblock %}

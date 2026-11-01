@@ -1,0 +1,20 @@
+CLAUDE.md
+
+# Cofre local do Obsidian
+projeto_fit/
+.obsidian/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Segredos e banco local
+.env
+instance/
+*.db
+Projeto_Senac.docx
+
+# IDE
+.idea/

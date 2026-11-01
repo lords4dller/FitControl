@@ -1,0 +1,633 @@
+:root {
+  --fundo: #f4f6f8;
+  --superficie: #ffffff;
+  --texto: #1f2933;
+  --apoio: #5f6c7b;
+  --borda: #dfe4ea;
+  --destaque: #0f766e;
+  --destaque-escuro: #0b5c56;
+  --destaque-claro: #e0f2f1;
+  --erro: #b42318;
+  --erro-claro: #fdecea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.apoio {
+  margin: 0 0 16px;
+  color: var(--apoio);
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+}
+
+.marca {
+  color: var(--destaque);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.menu {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.menu a {
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.menu a:hover {
+  background: var(--fundo);
+}
+
+.menu a[aria-current="page"] {
+  background: var(--destaque-claro);
+  color: var(--destaque-escuro);
+  font-weight: 600;
+}
+
+.topo-usuario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topo-usuario form {
+  margin: 0;
+}
+
+.conteudo {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.cartao {
+  margin-bottom: 16px;
+  padding: 20px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+}
+
+.centralizado {
+  text-align: center;
+}
+
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.indicador {
+  margin: 0;
+  padding: 16px;
+}
+
+.indicador strong {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.indicador span {
+  color: var(--apoio);
+  font-size: 0.9rem;
+}
+
+.tabela-rolavel {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--borda);
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  color: var(--apoio);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.etiqueta {
+  padding: 2px 8px;
+  background: var(--destaque-claro);
+  border-radius: 999px;
+  color: var(--destaque-escuro);
+  font-size: 0.85rem;
+}
+
+.botao {
+  display: inline-block;
+  padding: 10px 16px;
+  background: var(--destaque);
+  border: 1px solid var(--destaque);
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.botao:hover {
+  background: var(--destaque-escuro);
+}
+
+.botao-discreto {
+  padding: 6px 12px;
+  background: transparent;
+  border-color: var(--borda);
+  color: var(--texto);
+}
+
+.botao-discreto:hover {
+  background: var(--fundo);
+}
+
+.botao-secundario {
+  background: var(--superficie);
+  color: var(--destaque-escuro);
+}
+
+.botao-secundario:hover {
+  background: var(--destaque-claro);
+}
+
+.botao-perigo {
+  border-color: var(--erro);
+  color: var(--erro);
+}
+
+.botao-perigo:hover {
+  background: var(--erro-claro);
+}
+
+.botao-largo {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.acoes form {
+  margin: 0;
+}
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cabecalho h1 {
+  margin: 0;
+}
+
+.linha-compacta {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+
+.linha-compacta select {
+  min-width: 180px;
+  margin: 0;
+}
+
+/* Formulários */
+.formulario {
+  max-width: 640px;
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 16px;
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0 0 16px;
+  padding: 0;
+  border: none;
+}
+
+legend {
+  margin-bottom: 6px;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.opcoes-dias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.opcoes-dias label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.linha-exercicio {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px 110px 90px auto;
+  align-items: end;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.linha-exercicio label {
+  font-weight: 400;
+}
+
+.linha-exercicio label input,
+.linha-exercicio label select {
+  margin: 0;
+}
+
+/* Semana do aluno */
+.navegacao-semana {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 2px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  color: var(--texto);
+  text-decoration: none;
+}
+
+.dia:hover {
+  border-color: var(--destaque);
+}
+
+.dia small {
+  color: var(--apoio);
+}
+
+.dia-hoje {
+  border-color: var(--destaque);
+}
+
+.dia[aria-current="true"] {
+  background: var(--destaque);
+  border-color: var(--destaque);
+  color: #ffffff;
+}
+
+.dia[aria-current="true"] small {
+  color: #ffffff;
+}
+
+.lista-exercicios {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exercicio-dia {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--borda);
+  scroll-margin-top: 16px;
+}
+
+.exercicio-info span {
+  display: block;
+  color: var(--apoio);
+  font-size: 0.9rem;
+}
+
+.marcas {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+
+.marcacao {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  color: var(--texto);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.marcacao::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--apoio);
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.marcacao:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.marcacao-feito[aria-checked="true"] {
+  border-color: var(--destaque);
+}
+
+.marcacao-feito[aria-checked="true"]::before {
+  content: "✓";
+  background: var(--destaque);
+  border-color: var(--destaque);
+}
+
+.marcacao-nao-feito[aria-checked="true"] {
+  border-color: var(--erro);
+}
+
+.marcacao-nao-feito[aria-checked="true"]::before {
+  content: "✕";
+  background: var(--erro);
+  border-color: var(--erro);
+}
+
+.aviso {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  background: var(--destaque-claro);
+  border-radius: 6px;
+  color: var(--destaque-escuro);
+}
+
+.aviso-erro {
+  background: var(--erro-claro);
+  color: var(--erro);
+}
+
+.tela-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.tela-login .aviso,
+.cartao-login {
+  width: 100%;
+  max-width: 380px;
+}
+
+.cartao-login {
+  padding: 28px;
+}
+
+.marca-login {
+  color: var(--destaque);
+}
+
+label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+}
+
+input:focus,
+select:focus,
+.botao:focus-visible,
+.marca:focus-visible,
+.marcacao:focus-visible,
+.dia:focus-visible,
+.menu a:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 1px;
+}
+
+@media (max-width: 600px) {
+  .topo {
+    padding: 12px 16px;
+  }
+
+  .conteudo {
+    padding: 16px;
+  }
+
+  .topo {
+    flex-wrap: wrap;
+  }
+
+  .menu {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .topo-usuario span {
+    display: none;
+  }
+
+  .linha-exercicio {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--borda);
+  }
+
+  .linha-exercicio .campo-exercicio,
+  .linha-exercicio .remover-linha {
+    grid-column: 1 / -1;
+  }
+
+  .marcas {
+    width: 100%;
+  }
+
+  .marcacao {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 6px;
+    white-space: nowrap;
+  }
+
+  /* Mantém os indicadores em duas colunas para a semana aparecer logo. */
+  .indicadores {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .indicador {
+    padding: 12px;
+  }
+
+  .indicador strong {
+    font-size: 1.15rem;
+  }
+
+  .navegacao-semana strong {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .navegacao-semana .botao {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .dia span {
+    font-size: 0.8rem;
+  }
+
+  .linha-compacta select {
+    min-width: 0;
+  }
+
+  /* No celular, cada linha vira um bloco para nenhuma coluna ficar escondida. */
+  .tabela-empilhada thead {
+    display: none;
+  }
+
+  .tabela-empilhada,
+  .tabela-empilhada tbody,
+  .tabela-empilhada tr,
+  .tabela-empilhada td {
+    display: block;
+  }
+
+  .tabela-empilhada tr {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--borda);
+  }
+
+  .tabela-empilhada tr:last-child {
+    border-bottom: none;
+  }
+
+  .tabela-empilhada td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 2px 0;
+    border-bottom: none;
+    white-space: normal;
+  }
+
+  .tabela-empilhada td[data-rotulo]::before {
+    content: attr(data-rotulo);
+    color: var(--apoio);
+    font-size: 0.9rem;
+  }
+
+  .tabela-empilhada .titulo-linha {
+    font-weight: 600;
+  }
+}

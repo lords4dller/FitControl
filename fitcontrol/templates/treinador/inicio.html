@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block titulo %}Meus alunos · FitControl{% endblock %}
+{% block conteudo %}
+<h1>Meus alunos</h1>
+
+<section class="cartao">
+  {% if alunos %}
+  <table class="tabela-empilhada">
+    <thead>
+      <tr><th>Aluno</th><th>Treinos ativos</th><th>Dias treinados</th><th>Última avaliação</th><th>Ações</th></tr>
+    </thead>
+    <tbody>
+      {% for aluno in alunos %}
+      <tr>
+        <td class="titulo-linha">{{ aluno.usuario.nome }}</td>
+        <td data-rotulo="Treinos ativos">{{ aluno.treinos_ativos|length }}</td>
+        <td data-rotulo="Dias treinados">{{ aluno.dias_de_frequencia|length }}</td>
+        <td data-rotulo="Última avaliação">{{ aluno.medida_atual.data.strftime('%d/%m/%Y') if aluno.medida_atual else '—' }}</td>
+        <td><a class="botao botao-discreto" href="{{ url_for('treinador.treinos', aluno_id=aluno.id) }}">Gerenciar treinos</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="apoio">Nenhum aluno vinculado a você ainda.</p>
+  {% endif %}
+</section>
+{% endblock %}

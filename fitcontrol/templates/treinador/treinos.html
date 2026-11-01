@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block titulo %}Treinos de {{ aluno.usuario.nome }} · FitControl{% endblock %}
+{% block conteudo %}
+<div class="cabecalho">
+  <h1>Treinos de {{ aluno.usuario.nome }}</h1>
+  <a class="botao" href="{{ url_for('treinador.novo_treino', aluno_id=aluno.id) }}">Novo treino</a>
+</div>
+
+<section class="cartao">
+  {% if aluno.treinos_ativos %}
+  <table class="tabela-empilhada">
+    <thead>
+      <tr><th>Treino</th><th>Objetivo</th><th>Dias</th><th>Exercícios</th><th>Ações</th></tr>
+    </thead>
+    <tbody>
+      {% for treino in aluno.treinos_ativos %}
+      <tr>
+        <td class="titulo-linha">{{ treino.nome }}</td>
+        <td data-rotulo="Objetivo">{{ treino.objetivo or '—' }}</td>
+        <td data-rotulo="Dias">
+          {%- for numero in treino.dias_semana %}{{ dias_semana[numero][:3] }}{% if not loop.last %}, {% endif %}{% endfor -%}
+        </td>
+        <td data-rotulo="Exercícios">{{ treino.itens|length }}</td>
+        <td>
+          <div class="linha-compacta">
+            <a class="botao botao-discreto" href="{{ url_for('treinador.editar_treino', treino_id=treino.id) }}">Editar</a>
+            <form method="post" action="{{ url_for('treinador.excluir_treino', treino_id=treino.id) }}"
+                  data-confirmar="Excluir {{ treino.nome }}?">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="botao botao-discreto botao-perigo" type="submit">Excluir</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="apoio">Este aluno ainda não tem treinos.</p>
+  {% endif %}
+</section>
+
+<a class="botao botao-discreto" href="{{ url_for('treinador.inicio') }}">← Meus alunos</a>
+{% endblock %}

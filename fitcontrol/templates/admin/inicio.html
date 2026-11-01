@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block titulo %}Painel · FitControl{% endblock %}
+{% block conteudo %}
+<h1>Painel do administrador</h1>
+
+<div class="acoes">
+  <a class="botao" href="{{ url_for('admin.novo_aluno') }}">Cadastrar aluno</a>
+  <a class="botao" href="{{ url_for('admin.novo_treinador') }}">Cadastrar treinador</a>
+  <a class="botao botao-secundario" href="{{ url_for('admin.alunos') }}">Atribuir ou mudar treinador</a>
+</div>
+
+<div class="indicadores">
+  {% for rotulo, valor in totais.items() %}
+  <div class="cartao indicador">
+    <strong>{{ valor }}</strong>
+    <span>{{ rotulo }}</span>
+  </div>
+  {% endfor %}
+</div>
+
+<section class="cartao">
+  <h2>Usuários</h2>
+  <div class="tabela-rolavel">
+    <table>
+      <thead>
+        <tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Situação</th></tr>
+      </thead>
+      <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+          <td>{{ usuario.nome }}</td>
+          <td>{{ usuario.email }}</td>
+          <td><span class="etiqueta">{{ usuario.perfil.value|capitalize }}</span></td>
+          <td>{{ 'Ativo' if usuario.ativo else 'Inativo' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

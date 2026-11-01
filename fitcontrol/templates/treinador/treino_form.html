@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block titulo %}{{ 'Editar' if treino else 'Novo' }} treino · FitControl{% endblock %}
+
+{% macro linha_exercicio(linha) %}
+<div class="linha-exercicio">
+  <div class="campo-exercicio">
+    <label>Exercício
+      <select name="exercicio_id">
+        <option value="">Escolha…</option>
+        {% for grupo, itens in exercicios|groupby('grupo_muscular.nome') %}
+        <optgroup label="{{ grupo }}">
+          {% for exercicio in itens %}
+          <option value="{{ exercicio.id }}"{% if linha.exercicio_id == exercicio.id|string %} selected{% endif %}>{{ exercicio.nome }}</option>
+          {% endfor %}
+        </optgroup>
+        {% endfor %}
+      </select>
+    </label>
+  </div>
+  <label>Séries
+    <input type="number" name="series" min="1" max="99" value="{{ linha.series or 3 }}">
+  </label>
+  <label>Repetições
+    <input type="text" name="repeticoes" maxlength="20" value="{{ linha.repeticoes or '10' }}">
+  </label>
+  <label>Carga (kg)
+    <input type="text" name="carga_kg" inputmode="decimal" value="{{ linha.carga_kg if linha.carga_kg is not none and linha.carga_kg is defined else '' }}">
+  </label>
+  <button class="botao botao-discreto remover-linha" type="button" aria-label="Remover exercício">Remover</button>
+</div>
+{% endmacro %}
+
+{% block conteudo %}
+<h1>{{ 'Editar treino' if treino else 'Novo treino' }}</h1>
+<p class="apoio">Aluno: {{ aluno.usuario.nome }}</p>
+
+<form class="cartao" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+  <div class="grade-campos">
+    <div>
+      <label for="nome">Nome do treino</label>
+      <input id="nome" name="nome" type="text" maxlength="120" value="{{ dados.nome or '' }}" required>
+    </div>
+    <div>
+      <label for="objetivo">Objetivo</label>
+      <input id="objetivo" name="objetivo" type="text" maxlength="200" value="{{ dados.objetivo or '' }}">
+    </div>
+  </div>
+
+  <fieldset>
+    <legend>Dias da semana</legend>
+    <div class="opcoes-dias">
+      {% for nome in dias_semana %}
+      <label>
+        <input type="checkbox" name="dias" value="{{ loop.index0 }}"{% if loop.index0 in dados.dias %} checked{% endif %}>
+        {{ nome }}
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Exercícios</legend>
+    <div id="linhas">
+      {% for linha in dados.linhas or [{}] %}
+      {{ linha_exercicio(linha) }}
+      {% endfor %}
+    </div>
+    <button class="botao botao-secundario" id="adicionar-linha" type="button">Adicionar exercício</button>
+  </fieldset>
+
+  <div class="acoes">
+    <button class="botao" type="submit">Salvar treino</button>
+    <a class="botao botao-discreto" href="{{ url_for('treinador.treinos', aluno_id=aluno.id) }}">Cancelar</a>
+  </div>
+</form>
+
+<template id="modelo-linha">{{ linha_exercicio({}) }}</template>
+{% endblock %}

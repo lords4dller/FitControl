@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}FitControl{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+  {% if current_user.is_authenticated %}
+  <header class="topo">
+    <a class="marca" href="{{ url_for('inicio') }}">FitControl</a>
+    <nav class="menu" aria-label="Menu principal">
+      {% for endpoint, rotulo in menu %}
+      <a href="{{ url_for(endpoint) }}"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>{{ rotulo }}</a>
+      {% endfor %}
+    </nav>
+    <div class="topo-usuario">
+      <span>{{ current_user.nome }}</span>
+      <form method="post" action="{{ url_for('auth.logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button class="botao botao-discreto" type="submit">Sair</button>
+      </form>
+    </div>
+  </header>
+  {% endif %}
+
+  <main class="{% block classe_main %}conteudo{% endblock %}">
+    {% for categoria, mensagem in get_flashed_messages(with_categories=true) %}
+    <p class="aviso aviso-{{ categoria }}" role="alert">{{ mensagem }}</p>
+    {% endfor %}
+    {% block conteudo %}{% endblock %}
+  </main>
+</body>
+</html>

@@ -36,6 +36,7 @@ Aplicação criada para entrega da 2ª Etapa do Projeto Integrador do 4º Semest
    3. [Personas](#33-personas)
    4. [Jornada do Usuário](#34-jornada-do-usuário)
 4. [Referências](#4-referências)
+5. [Contas de demonstração](#5-contas-de-demonstração)
 
 ---
 
@@ -147,3 +148,18 @@ O mercado fitness exige eficiência na prestação de serviços e no acompanhame
 
 
 * **Necessidade atendida:** Autonomia para acompanhar o treino e a evolução sem depender de encontros presenciais constantes com o personal.
+
+---
+
+## 5. Contas de demonstração
+
+Contas criadas pelo comando `flask seed`, apenas para testar a aplicação. Todas usam a mesma senha.
+
+| Perfil | Nome | E-mail | Senha | Observação |
+| :--- | :--- | :--- | :--- | :--- |
+| Administrador | Roberto Mendes | `admin@fitcontrol.test` | `fitcontrol123` | Cadastra alunos e treinadores |
+| Treinador | Giuseppe Gourlami | `giuseppe@fitcontrol.test` | `fitcontrol123` | Treinador de Maria e Pedro |
+| Treinador | Ana Ribeiro | `ana@fitcontrol.test` | `fitcontrol123` | Sem alunos |
+| Aluno | Maria Camole | `maria@fitcontrol.test` | `fitcontrol123` | Com treinos e avaliações físicas |
+| Aluno | Pedro Almeida | `pedro@fitcontrol.test` | `fitcontrol123` | Com treino, sem avaliação física |
+| Aluno | Lucas Ferreira | `lucas@fitcontrol.test` | `fitcontrol123` | Sem treinador |

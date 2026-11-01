@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block titulo %}Treinadores · FitControl{% endblock %}
+{% block conteudo %}
+<div class="cabecalho">
+  <h1>Treinadores</h1>
+  <a class="botao" href="{{ url_for('admin.novo_treinador') }}">Cadastrar treinador</a>
+</div>
+
+<section class="cartao">
+  {% if treinadores %}
+  <table class="tabela-empilhada">
+    <thead>
+      <tr><th>Treinador</th><th>E-mail</th><th>CREF</th><th>Especialidade</th><th>Alunos</th></tr>
+    </thead>
+    <tbody>
+      {% for treinador in treinadores %}
+      <tr>
+        <td class="titulo-linha">{{ treinador.usuario.nome }}</td>
+        <td data-rotulo="E-mail">{{ treinador.usuario.email }}</td>
+        <td data-rotulo="CREF">{{ treinador.cref or '—' }}</td>
+        <td data-rotulo="Especialidade">{{ treinador.especialidade or '—' }}</td>
+        <td data-rotulo="Alunos">{{ treinador.alunos|length }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="apoio">Nenhum treinador cadastrado.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block titulo %}Cadastrar treinador · FitControl{% endblock %}
+{% block conteudo %}
+<h1>Cadastrar treinador</h1>
+
+<form class="cartao formulario" method="post">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  {% include "admin/_conta.html" %}
+
+  <div class="grade-campos">
+    <div>
+      <label for="cref">CREF</label>
+      <input id="cref" name="cref" type="text" maxlength="20" value="{{ dados.get('cref', '') }}">
+    </div>
+    <div>
+      <label for="especialidade">Especialidade</label>
+      <input id="especialidade" name="especialidade" type="text" maxlength="120" value="{{ dados.get('especialidade', '') }}">
+    </div>
+  </div>
+
+  <div class="acoes">
+    <button class="botao" type="submit">Cadastrar</button>
+    <a class="botao botao-discreto" href="{{ url_for('admin.treinadores') }}">Cancelar</a>
+  </div>
+</form>
+{% endblock %}

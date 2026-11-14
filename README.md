@@ -31,9 +31,13 @@ Aplicação criada para entrega da 2ª Etapa do Projeto Integrador do 4º Semest
 Como rodar localmente em ambiente Debian/Ubuntu:
 
 `git clone https://github.com/lords4dller/FitControl.git` 
+
 `cd FitControl`
+
 `python3 -m venv .venv`
+
 `.venv/bin/pip install -r requirements.txt`
+
 `.venv/bin/flask run`
 
 ---

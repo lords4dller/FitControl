@@ -7,6 +7,8 @@ Aplicação criada para entrega da 2ª Etapa do Projeto Integrador do 4º Semest
 
 **EAD - Ensino à Distância | 2026**
 
+## [ Video do Projeto](https://drive.google.com/file/d/1wIgVZlTMXLKmRSEzGZc78jxjfhpuyEJ5/view?usp=drive_link)
+
 ---
 
 # FitControl
@@ -23,6 +25,16 @@ Aplicação criada para entrega da 2ª Etapa do Projeto Integrador do 4º Semest
 * **Rodrigo Prado Luis Nunes**
 
 **Orientador / Professor:** Anderson Clayton Garcia Lopes
+
+---
+
+Como rodar localmente em ambiente Debian/Ubuntu:
+
+`git clone https://github.com/lords4dller/FitControl.git` 
+`cd FitControl`
+`python3 -m venv .venv`
+`.venv/bin/pip install -r requirements.txt`
+`.venv/bin/flask run`
 
 ---
 
